@@ -1,6 +1,9 @@
 package servletdemo;
 
 import java.io.IOException;
+import java.util.Enumeration;
+
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +29,16 @@ public class TestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ServletConfig config = this.getServletConfig();
+		String name = config.getInitParameter("user");
+		System.out.println(name);
+		Enumeration<String> names = config.getInitParameterNames();
+		while (names.hasMoreElements()) {
+			String names1 = (String) names.nextElement();
+			String vules = config.getInitParameter(names1);
+			System.out.println(names1);
+			System.out.println(vules);
+		}
 	}
 
 	/**
