@@ -1,6 +1,7 @@
 package servletdemo;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Enumeration;
 
 import javax.servlet.ServletConfig;
@@ -54,7 +55,21 @@ public class TestServlet extends HttpServlet {
 			String vules1 = context.getInitParameter(Name);
 			System.out.println(vules1);
 		}
-		
+		String realPath = context.getRealPath("/note.txt");
+		//不是E:\yangzelongworkspace\Demo\WebContent\note.txt
+		//E:\yangzelongworkspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Demo\note.txt
+		System.out.println(realPath);
+		String contextPath = context.getContextPath();//获取当前web应用的名称
+		System.out.println(contextPath);
+		try {
+			InputStream is = context.getResourceAsStream("/WEB-INF/classes/jdbc.porperties");
+			System.out.println(is);
+			ClassLoader classLoader = getClass().getClassLoader();
+			InputStream is1 = classLoader.getResourceAsStream("jdbc.porperties");
+			System.out.println(is1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
