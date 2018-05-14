@@ -110,4 +110,26 @@ ServletConfig：封装了是servlet配置信息，和获取servletconfig对象
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
+		
+			public void service(ServletRequest request, ServletResponse response) 
+			
+		ServletRequest对象封装了请求信息，可以通过该对象获取任何想要的请求信息
+		
+		ServletResponse对象封装了响应信息，可通过该对象获得响应信息
+			
+			Tips：ServletRequest和ServletResponse这两个接口的实现类都是服务器赋予的，并在服务器加载service()方法的
+			时候传入
+			
+		方法：	
+			servletRequest.getParamater(String name); //根据参数名获取数据
+			//通过foreach遍历该字符串数组
+			String[] names = servletRequest.getParamaterVaules(String name);//根据请求参数的名字，返回一个字符串数组
+			
+			
+			
+			
+			
+			
+			
+			

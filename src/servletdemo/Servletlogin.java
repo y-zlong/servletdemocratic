@@ -8,6 +8,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 public class Servletlogin implements Servlet {
 
@@ -56,6 +57,15 @@ public class Servletlogin implements Servlet {
 				System.out.println(name);
 				System.out.println(val);
 			}
+			System.out.println("========================================================");
+			//因为HttpServletRequest是ServletRequert的子接口在此处必须要强转
+			HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+			//获取请求方法
+			String method = httpServletRequest.getMethod();
+			System.out.println(method);
+			//获取get请求？后的字符串
+			String queryString = httpServletRequest.getQueryString();
+			System.out.println(queryString);
 	}
 
 }
