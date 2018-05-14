@@ -32,4 +32,12 @@
 		<servlet-name>TestServlet</servlet-name>
 		<url-pattern>/hello</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>Servletlogin</servlet-name>
+		<servlet-class>servletdemo.Servletlogin</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Servletlogin</servlet-name>
+		<url-pattern>/Servletlogin</url-pattern>
+	</servlet-mapping>
 </web-app>
