@@ -2,6 +2,7 @@ package servletdemo;
 
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.Map;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -57,6 +58,7 @@ public class Servletlogin implements Servlet {
 				System.out.println(name);
 				System.out.println(val);
 			}
+			Map<String, String[]> parameterMap = request.getParameterMap();
 			System.out.println("========================================================");
 			//因为HttpServletRequest是ServletRequert的子接口在此处必须要强转
 			HttpServletRequest httpServletRequest = (HttpServletRequest) request;
