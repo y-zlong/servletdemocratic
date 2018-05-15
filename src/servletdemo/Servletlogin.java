@@ -1,6 +1,7 @@
 package servletdemo;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -68,6 +69,13 @@ public class Servletlogin implements Servlet {
 			//获取get请求？后的字符串
 			String queryString = httpServletRequest.getQueryString();
 			System.out.println(queryString);
+			//设置响应的类型
+			response.setContentType("application/msword");
+			//response.getWriter()向浏览器返回相应信息
+			PrintWriter writer = response.getWriter();
+			//调用printin()方法输出到客户端
+			writer.println("nihao.....");
+			
 	}
 
 }
