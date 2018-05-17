@@ -13,8 +13,13 @@ public class JdbcTest1 {
 		Statement tement = null;
 		ResultSet resultSet = null;
 		try {
-			Driver driver = new com.mysql.jdbc.Driver();
-			DriverManager.registerDriver(driver);
+			//第一种方式加载驱动
+		/*	Driver driver = new com.mysql.jdbc.Driver();
+			DriverManager.registerDriver(driver);*/
+			//第二种直接加载mysql驱动
+			//通过java反射机制
+			Class.forName("com.mysql.jdbc,Deriver");
+			
 			String url = "jdbc:mysql://localhost:3306/test";
 			String user = "root";
 			String password = "123456";
@@ -27,6 +32,9 @@ public class JdbcTest1 {
 				  int age = resultSet.getInt(2);
 			  }
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			if (resultSet != null) {
@@ -58,6 +66,22 @@ public class JdbcTest1 {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+	}
+}
+/**
+ *通过static静态代码块加载注册驱动
+ * @author Administrator
+ *
+ */
+class DriverMannager{
+	static {
+		try {
+			Driver driver = new com.mysql.jdbc.Driver();
+			DriverManager.registerDriver(driver);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
