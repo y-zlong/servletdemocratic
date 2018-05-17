@@ -27,7 +27,6 @@ public class JdbcTest1 {
 				  int age = resultSet.getInt(2);
 			  }
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			if (resultSet != null) {
