@@ -128,6 +128,52 @@ ServletConfig：封装了是servlet配置信息，和获取servletconfig对象
 			
 			
 			
+		JDBC的回顾：
+			
+				1.注册驱动
+					Class.forName("com.mysql.jdbc,Deriver");
+				2.获取数据库连接
+				String url = "jdbc:mysql://localhost:3306/test";
+				String user = "root";
+				String password = "123456";
+				3.获取数据库连接对象Connaction对象
+				Connection connection = DriverManager.getConnection(url, user, password);
+				4.获取数据操作对象statement对象
+				Statement state = connection.createStatement();
+				5.执行SQL语句
+				String sql = "select ename form user";
+				ResultSet rs = statement.executeQuery(sql);
+				6.处理返回结果集
+				while(rs.next()){
+					String name = rs.gerString("ename");
+				}
+				7.关闭资源
+							if (resultSet != null) {
+						try {
+							resultSet.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}if(tement != null) {
+					try {
+						tement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}if(connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}if(resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+			
 			
 			
 			
