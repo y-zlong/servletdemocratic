@@ -1,7 +1,14 @@
 package servlettest;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Properties;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -41,10 +48,10 @@ public class LoginServlet implements Servlet {
 	@Override
 	public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
 		//获取页面传递参数
-		String user = request.getParameter("username");
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		//获取web应用初始化参数
-		ServletContext servletContext = servletConfig.getServletContext();
+		/*ServletContext servletContext = servletConfig.getServletContext();
 		String initUser = servletContext.getInitParameter("user");
 		String initPassword = servletContext.getInitParameter("password");
 		PrintWriter writer = response.getWriter();
@@ -52,7 +59,58 @@ public class LoginServlet implements Servlet {
 			writer.println("hello"+user);
 		}else {
 			writer.print("sorry"+user);
+		}*/
+		//通过reader加载文件
+		FileReader reader = new FileReader("conf/jdbc.porperties");
+		Properties properties = new Properties();
+		String driver = properties.getProperty("driver");
+		String url = properties.getProperty("url");
+		String user = properties.getProperty("user");
+		String pwd = properties.getProperty("password");
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		boolean flag = false;
+		/**
+		 * 使用PerparedStatement对象预编译sql
+		 */
+		try {
+		 conn = DriverManager.getConnection(url, user, password);
+		 String sql = "select name from t_name where name = ? and password = ?";
+		 ps = conn.prepareStatement(sql);
+		 ps.setString(1, username);
+		 ps.setString(2, password);
+		 rs = ps.executeQuery();
+		 if(rs.next()) {
+			 flag = true;
+		 }
+		 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}if(ps != null);
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}if(conn != null);
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 	}
 
 }
