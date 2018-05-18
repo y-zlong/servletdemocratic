@@ -77,6 +77,7 @@ public class LoginServlet implements Servlet {
 		try {
 		 conn = DriverManager.getConnection(url, user, password);
 		 String sql = "select name from t_name where name = ? and password = ?";
+		 conn.setAutoCommit(false);
 		 ps = conn.prepareStatement(sql);
 		 ps.setString(1, username);
 		 ps.setString(2, password);
@@ -85,9 +86,15 @@ public class LoginServlet implements Servlet {
 			 flag = true;
 		 }
 		 
+		 conn.commit();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		}finally {
 			if(rs != null) {
 				try {
