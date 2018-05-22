@@ -20,7 +20,7 @@ class Orange implements Frile{
 	
 }
  class Test{
-	public Frile get(String className) {
+	public static Frile get(String className) {
 		if("Apple".equals(className)) {
 			return new Apple();
 		}
@@ -31,3 +31,15 @@ class Orange implements Frile{
 		
 	}
 }
+
+
+class Test1{
+	@SuppressWarnings("static-access")
+	public static void main(String[] args) {
+		new Test().get("");
+	}
+	
+}	
+	
+	
+	
