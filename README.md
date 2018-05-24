@@ -174,8 +174,48 @@ ServletConfig：封装了是servlet配置信息，和获取servletconfig对象
 						e.printStackTrace();
 					}
 			
+	jsp：forward	
+	
+		<%-----<%@ include file = "b.jsp" %>  -->
+	<jsp:include page="b.jsp"/>
+	 --%>
+	 <%--转发   页面的仍然停在a.jsp,等价于request.getRequestDispatcher("/jsp/b.jsp").forward(request, response);
+	 <jsp:forward page="/jsp/b.jsp"></jsp:forward>
+	 <%
+	 	request.getRequestDispatcher("/jsp/b.jsp").forward(request, response);
+	 %>
+	  --%>	
 			
+		//可以通过jsp:param子标签来传递参数给b.jsp
+		b.jsp可以通过<%=request.getparamet("name")%>的形式来获取,同样也可以用在<jsp:include>;
 			
-			
-			
-			
+		<jsp:forward page="/jsp/b.jsp">
+	  	<jsp:param value="123456" name="username"/>
+		 </jsp:forward>	
+		 
+		<h1>AAAAAAA</h1>
+		<%=request.getParameter("username")%>	
+		
+		
+		  <jsp:include page="/jsp/b.jsp">
+	  		<jsp:param value="123589" name="name"/>	
+		  </jsp:include>
+		   <%=request.getParameter("name") %>
+		   
+		   在b.jsp页面可以通过request.getparamet("name")来获取传过来的参数
+		   
+		   
+		   
+		   乱码问题
+		   
+		   
+		   
+		    <%
+ 				request.setCharacterEncoding("utf-8");
+			 %>
+ 				user:<%= request.getParameter("name")%>
+ 				
+ 				  <form action="b.jsp" method= "post">
+			  			user:<input type="text" name="name"/>
+			  			<input type="submit" value="Submit"/>
+			  	  </form>
