@@ -219,3 +219,5 @@ ServletConfig：封装了是servlet配置信息，和获取servletconfig对象
 			  			user:<input type="text" name="name"/>
 			  			<input type="submit" value="Submit"/>
 			  	  </form>
+			  	  
+			  	  Get请求和post请求的区别 
