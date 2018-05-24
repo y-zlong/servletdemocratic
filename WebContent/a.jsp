@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href = "b.jsp">bbbbb</a>
-	<% 
-		 request.getAttribute("name");
-	%>
+	<a href = "studentService">获取列表信息</a>
 </body>
 </html>
