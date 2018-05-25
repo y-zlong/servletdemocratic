@@ -10,20 +10,21 @@ import java.util.List;
 
 public class StudentDao {
 	
-	public List<studentBean> getListAll() throws SQLException {
+	public List<studentBean> getListAll(){
 		List<studentBean> stu = new  ArrayList<studentBean>();
 		Connection connection = null;
-		PreparedStatement prepareStatement  = null;
+		PreparedStatement ps  = null;
 		ResultSet resultSet = null;
+		String driver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/user";
+		String user = "root";
+		String password = "123456";
 		try {
-			Class.forName("driver");
-			String url = "com.mysql.jdbc.Driver";
-			String user = "root";
-			String password = "123456";
+			Class.forName(driver); 
 			connection = DriverManager.getConnection(url, user, password);
-			String sql = "SELECT id,NAME,number,dress FROM student";
-			prepareStatement = connection.prepareStatement(sql);
-			resultSet = prepareStatement.executeQuery();
+			String sql ="select id,name,number,dress from student";
+			ps = connection.prepareStatement(sql);
+			resultSet = ps.executeQuery();
 			while(resultSet.next()) {
 				int stu_id = resultSet.getInt(1);
 				String stu_name = resultSet.getString(2);
@@ -31,35 +32,37 @@ public class StudentDao {
 				String stu_dress = resultSet.getString(4);
 				studentBean student = new studentBean(stu_id, stu_name, stu_num, stu_dress);
 				stu.add(student);
-			}
-		} catch (ClassNotFoundException e) {
+				}
+			} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			try {
-				if(resultSet != null) {
-					resultSet.close();
+			}finally {
+				if (resultSet != null) {
+					try {
+						resultSet.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			}catch (Exception e) {
-				// TODO: handle exception
-			}
-			try {
-				if(prepareStatement != null) {
-					prepareStatement.close();
+				if(ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			}catch (Exception e) {
-				// TODO: handle exception
-			}
-			try {
-				if(connection != null) {
+			} 	if (connection != null) {
+				try {
 					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			}catch (Exception e) {
-				// TODO: handle exception
 			}
-			
-		}
-		
+
 		return stu;
-	}
+		}
+
 }

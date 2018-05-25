@@ -15,17 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 public class studentService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException,IOException {
 		
-		StudentDao dao = new StudentDao();
-		try {
-			List<studentBean> listAll = dao.getListAll();
-			request.setAttribute("student", listAll);
-			request.getRequestDispatcher("/student.jsp");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	StudentDao stuDao = new StudentDao();
+	List<studentBean> stu = stuDao.getListAll();
+	request.setAttribute("student", stu);
 
+	request.getRequestDispatcher("/student.jsp").forward(request, response);
+}
 }

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.mysql.cj.jdbc.Driver;
+
 
 public class JdbcTest {
 	
@@ -16,7 +16,7 @@ public class JdbcTest {
 		ResultSet query = null;
 		try {
 			//获取驱动对象
-			Driver driver = new com.mysql.jdbc.Driver();
+			com.mysql.jdbc.Driver driver = new com.mysql.jdbc.Driver();
 			//注册驱动
 			DriverManager.registerDriver(driver);
 			//获取数据库连接
