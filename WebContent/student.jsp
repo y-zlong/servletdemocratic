@@ -12,12 +12,13 @@
 	<%
 	 List<studentBean> stu =(List<studentBean>) request.getAttribute("student");
 	%>
-	<table>
+	<table cellpadding="10" cellspacing="0" border="1">
 		<tr>
 			<th>id</th>
 			<th>name</th>
 			<th>number</th>
 			<th>dress</th>
+			<th>Delet</th>
 		</tr>
 		<%
 			for(studentBean student : stu){
@@ -27,6 +28,7 @@
 				<td><%=student.getName() %></td>
 				<td><%=student.getNumber() %></td>
 				<td><%=student.getDress() %></td>
+				<td><a href = "delServlet?<%=student.getId() %>">Delet</a></td>
 			</tr>
 		<% 		
 			}
